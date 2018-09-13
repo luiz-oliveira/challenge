@@ -1,0 +1,13 @@
+django==2.1
+gunicorn==19.9.0
+requests==2.19.1
+djangorestframework==3.8.2
+django-oauth-toolkit==1.2.0
+django-filter==2.0.0
+psycopg2==2.7.5
+
+# Test and code quality
+pylint==2.1.1
+coverage==4.5.1
+django-cors-headers==2.4.0
+Faker==0.9.0

@@ -1,0 +1,4 @@
+# Editor Ignore
+/.vscode
+__pycache__/
+.idea/*
