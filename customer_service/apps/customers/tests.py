@@ -6,12 +6,18 @@ from random import randint
 from django.contrib.auth.models import User
 
 class ReadCustomerTestCase(TestCase):
+
+    def list_url(self):
+        return reverse('customers:customer-list')
+
+    def detail_url(self):
+        return reverse('customers:customer-detail', args=[self.customer.id])
+
     def setUp(self):
         faker = Faker()
 
         # Creating a Default user for test
-        self.superuser = User.objects.create_superuser('username', 'user@email.com', 'password')
-        self.superuser.save()
+        User.objects.create_superuser('username', 'user@email.com', 'password').save()
 
         # Login user
         self.client.login(username='john', password='johnpassword')
@@ -20,15 +26,15 @@ class ReadCustomerTestCase(TestCase):
         self.customer = Customer()
         self.customer.full_name = faker.name()
         self.customer.address = faker.address()
-        self.customer.cpf = '99999999999' # The CPF is not validated
-        self.customer.email = faker.safe_email()
-        self.customer.phone = faker.phone_number()
+        self.customer.cpf = '99999999999'
+        self.customer.email = 'test@test.com'
+        self.customer.phone = '5524988457899'
         self.customer.save()
 
     def test_can_read_customer_list(self):
-        response = self.client.get(reverse('customer-list'))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response = self.client.get(self.list_url())
+        self.assertEqual(response.status_code, 200)
 
     def test_can_read_user_detail(self):
-        response = self.client.get(reverse('customer-detail', args=[self.customer.id]))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response = self.client.get(self.detail_url())
+        self.assertEqual(response.status_code, 200)
