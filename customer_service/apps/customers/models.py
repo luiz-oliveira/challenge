@@ -8,10 +8,10 @@ class Customer(models.Model):
             models.Index(fields=['cpf'], name='cpf_index')
         ]
 
-    full_name = models.CharField(max_length=200)
-    address = models.CharField(max_length=200)
+    full_name = models.CharField(max_length=250)
+    address = models.CharField(max_length=250)
     cpf = models.CharField(max_length=11, unique=True)
-    email = models.EmailField()
+    email = models.CharField(max_length=100)
     phone = models.CharField(validators=CustomValidators.validate_phone(), max_length=13)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
