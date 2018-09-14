@@ -15,8 +15,8 @@ The ideal soluction is to develop 4 diferent services tha carries specifics conf
 **The service auth "works" as a proxy**
 <br/>
 **Only the Service A should contains sensitive data for security purposes**
-
-Any of the services can be hosted on AWS Cloud
+<br/>
+**Any of the services can be hosted on AWS Cloud**
 
 ![Ideal Architecture Soluction](https://github.com/luiz-oliveira/challenge/blob/master/doc/ideal_soluction.png)
 
