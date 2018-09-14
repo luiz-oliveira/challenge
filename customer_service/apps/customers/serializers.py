@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Customer
-from apps.debts.serializers import DebtSerializer
+from apps.debts.serializers import DebtListSerializer
 
 class CustomerListSerializer(serializers.ModelSerializer):  
     """
@@ -8,13 +8,13 @@ class CustomerListSerializer(serializers.ModelSerializer):
     """  
     class Meta:
         model = Customer
-        fields = ('full_name', 'cpf', 'email')
+        fields = ('id','full_name', 'cpf', 'email')
 
 class CustomerDetailsSerializer(serializers.ModelSerializer):
     """
         Serializes a specific of customers and his debts
     """  
-    debts = DebtSerializer(many=True, read_only=True)
+    debts = DebtListSerializer(many=True, read_only=True)
     
     class Meta:
         model = Customer

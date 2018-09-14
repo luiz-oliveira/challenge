@@ -3,15 +3,14 @@ from oauth2_provider.contrib.rest_framework import OAuth2Authentication, TokenHa
 from .serializers import CustomerListSerializer, CustomerDetailsSerializer
 from .models import Customer
 
-class CustomerList(generics.ListAPIView):
+class CustomerList(generics.ListCreateAPIView):
     """
         Renders a list of customers
     """  
-    queryset = Customer.objects.all()
     serializer_class = CustomerListSerializer
     authentication_classes = [OAuth2Authentication]
     permission_classes = [TokenHasScope]
-    required_scopes = ['read']
+    required_scopes = ['read', 'write']
 
     def get_queryset(self):
         customers = Customer.objects.all()

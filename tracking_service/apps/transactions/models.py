@@ -1,12 +1,13 @@
-from django.db import models
+from mongoengine import EmbeddedDocument, fields
 from apps.customers.models import Customer
 
-class Transaction(models.Model):
-
-    customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='transactions')
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    date_debt = models.DateField()
-    payment_type = models.CharField(max_length=100)
+class Transaction(EmbeddedDocument):
+    """
+        This model contains the transaction data
+    """
+    amount = fields.DecimalField(max_digits=10, decimal_places=2)
+    date_debt = fields.DateField()
+    payment_type = fields.CharField(max_length=100)
 
     def __str__(self):
-        return "{} - R$ {} ({})".format(self.customer_id, self.amount, self.payment_type)
+        return "R$ {} ({})".format(self.amount, self.payment_type)

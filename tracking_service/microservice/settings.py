@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import os
+import os, mongoengine
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,8 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-SECURE_SSL_HOST = os.environ.get('HOSTNAME', 'localhost')
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,12 +40,14 @@ INSTALLED_APPS = [
     # Custom Apps
     'apps.users',
     'apps.customers',
-    'apps.transactions',
+    'apps.incomes',
+    'apps.patrimonies',
 
     # 3rd Party Apps
     'rest_framework',
-    'oauth2_provider',
+    'rest_framework_mongoengine',
     'django_filters',
+    'oauth2_provider',
     'corsheaders'
 ]
 
@@ -110,13 +110,18 @@ WSGI_APPLICATION = 'microservice.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DATABASE_A_NAME', 'database_c'),
-        'USER': os.environ.get('DATABASE_A_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DATABASE_A_PASSWORD', 'postgres'),
-        'HOST': os.environ.get('DATABASE_A_HOST', 'localhost'),
-        'PORT': os.environ.get('DATABASE_A_PORT', '5432'),
+        'NAME': os.environ.get('DATABASE_B_NAME', 'database_c'),
+        'USER': os.environ.get('DATABASE_B_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DATABASE_B_PASSWORD', 'postgres'),
+        'HOST': os.environ.get('DATABASE_B_HOST', 'localhost'),
+        'PORT': os.environ.get('DATABASE_B_PORT', '5432'),
     }
 }
+
+mongoengine.connect(
+    db=os.environ.get('MONGODB_C_NAME', 'database_c'),
+    host=os.environ.get('MONGODB_C_HOST', 'localhost')
+)
 
 
 # Password validation

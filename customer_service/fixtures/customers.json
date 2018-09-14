@@ -1,0 +1,29 @@
+[
+  {
+    "model": "apps.customer.Customer",
+    "pk": 1,
+    "fields": {
+      "full_name": "Lucas Rinaldi",
+      "address": "Rua dos Paumares, Petrópolis, RJ",
+      "cpf": "12345678910",
+      "email": "lucas@gmail.com",
+      "phone": "5524992446687"
+    }
+  },
+  {
+    "model": "apps.customer.Customer",
+    "pk": 2,
+    "fields": {
+      "full_name": "Maria Clara",
+      "cpf": "55544466622"
+    }
+  },
+  {
+    "model": "apps.customer.Customer",
+    "pk": 3,
+    "fields": {
+      "full_name": "Luis Claudio",
+      "cpf": "22211133344"
+    }
+  }
+]

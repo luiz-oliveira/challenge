@@ -3,7 +3,9 @@ from apps.incomes.models import Income
 from apps.patrimonies.models import Patrimony
 
 class Customer(Document):
-
+    """
+        This models contains the customer data.
+    """
     full_name = fields.StringField(max_length=200, required=True)
     cpf = fields.StringField(max_length=11, required=True, unique=True)
     birth_date = fields.DateTimeField(required=True)

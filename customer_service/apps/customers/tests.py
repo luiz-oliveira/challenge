@@ -1,9 +1,10 @@
 from django.test import TestCase, Client, RequestFactory
 from django.urls import reverse
 from .models import Customer
+from apps.debts.models import Debt
 from faker import Faker
-from random import randint
 from django.contrib.auth.models import User
+from datetime import date
 
 class ReadCustomerTestCase(TestCase):
 
@@ -30,11 +31,9 @@ class ReadCustomerTestCase(TestCase):
         self.customer.phone = '5524988457899'
         self.customer.save()
 
-
-    def test_cannot_read_customer_list_whitout_token(self):
-        response = self.client.post(self.list_url())
-        self.assertEqual(response.status_code, 401)
-
-    def test_cannot_read_customer_detail_whitout_token(self):
-        response = self.client.post(self.list_url())
-        self.assertEqual(response.status_code, 401)
+        # Creating a basic debit
+        self.debit = Debt()
+        self.debit.customer_id = self.customer
+        self.debit.amount = 1000
+        self.debit.date_debt = date.today()
+        self.debit.save()

@@ -9,7 +9,7 @@ class UserList(generics.ListAPIView):
     serializer_class = UserSerializer
     permission_classes = [TokenHasScope, IsAdminUser]
     authentication_classes = [OAuth2Authentication]
-    required_scopes = ['read', 'write']
+    required_scopes = ['read']
 
 
 class UserDetails(generics.RetrieveAPIView):
@@ -17,4 +17,4 @@ class UserDetails(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     permission_classes = [TokenHasScope, IsAdminUser]
     authentication_classes = [OAuth2Authentication]
-    required_scopes = ['read', 'write']
+    required_scopes = ['read']

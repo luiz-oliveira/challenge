@@ -8,5 +8,5 @@ class Customer(viewsets.ModelViewSet):
     serializer_class = CustomerSerializer
     authentication_classes = [OAuth2Authentication]
     permission_classes = [TokenHasScope]
-    required_scopes = ['read']
+    required_scopes = ['read', 'write']
     

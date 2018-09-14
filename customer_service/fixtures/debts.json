@@ -1,0 +1,38 @@
+[
+  {
+    "model": "apps.debts.Debt",
+    "pk": 1,
+    "fields": {
+      "customer_id": 1,
+      "amount": 1000,
+      "date_debt": "2018-10-10"
+    }
+  },
+  {
+    "model": "apps.debts.Debt",
+    "pk": 2,
+    "fields": {
+      "customer_id": 1,
+      "amount": 250,
+      "date_debt": "2018-10-15"
+    }
+  },
+  {
+    "model": "apps.debts.Debt",
+    "pk": 3,
+    "fields": {
+      "customer_id": 2,
+      "amount": 5000,
+      "date_debt": "2018-10-05"
+    }
+  },
+  {
+    "model": "apps.debts.Debt",
+    "pk": 1,
+    "fields": {
+      "customer_id": 1,
+      "amount": 1000,
+      "date_debt": "2018-10-03"
+    }
+  }
+]
