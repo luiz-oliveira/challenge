@@ -13,6 +13,21 @@ class CustomerList(generics.ListAPIView):
     permission_classes = [TokenHasScope]
     required_scopes = ['read']
 
+    def get_queryset(self):
+        customers = Customer.objects.all()
+        return self.create_filters(self.request, customers)
+
+    def create_filters(self, request, customers):
+        if request.GET.get("name"):
+            customers = customers.filter(full_name__contains=self.request.GET["name"])
+        if request.GET.get("cpf"):
+            customers = customers.filter(cpf=self.request.GET["cpf"])
+        if request.GET.get("email"):
+            customers = customers.filter(email=self.request.GET["email"])
+        if request.GET.get("phone"):
+            customers = customers.filter(email=self.request.GET["phone"])
+        return customers
+
 class CustomerDetails(generics.RetrieveAPIView):
     """
         Renders a specific customer with his debits
