@@ -1,7 +1,7 @@
 # Ideal Soluction
 
-![Ideal Architecture Soluction](https://github.com/luiz-oliveira/challenge/doc/ideal_soluction.png)
+![Ideal Architecture Soluction](https://github.com/luiz-oliveira/challenge/doc/tree/master/ideal_soluction.png)
 
 # Actual Soluction
 
-![Actual Architecture Soluction](https://github.com/luiz-oliveira/challenge/doc/actual_soluction.png)
+![Actual Architecture Soluction](https://github.com/luiz-oliveira/challenge/doc/tree/master/actual_soluction.png)
