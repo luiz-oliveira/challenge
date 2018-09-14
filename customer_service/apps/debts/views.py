@@ -1,27 +1,27 @@
-from rest_framework import generics
+from rest_framework import viewsets
 from oauth2_provider.contrib.rest_framework import OAuth2Authentication, TokenHasScope
-from .serializers import DebtListSerializer, DebtDetailsSerializer
+from .serializers import DebtSerializer
 from .models import Debt
 
-class DebtsList(generics.ListCreateAPIView):
+class DebtView(viewsets.ModelViewSet):
     """
-        Renders a list of debits
+        A viewset that render a list of customers or a single one
     """  
-    queryset = Debt.objects.all()
-    serializer_class = DebtListSerializer
+    serializer_class = DebtSerializer
     authentication_classes = [OAuth2Authentication]
     permission_classes = [TokenHasScope]
     required_scopes = ['read', 'write']
 
+    def get_queryset(self):
+        debts = Debt.objects.all()
+        return self.create_filters(self.request, debts)
 
-class DebtsDetails(generics.RetrieveAPIView):
-    """
-        Renders a specific debit with his debits
-    """  
-    queryset = Debt.objects.all()
-    serializer_class = DebtDetailsSerializer
-    authentication_classes = [OAuth2Authentication]
-    permission_classes = [TokenHasScope]
-    required_scopes = ['read']
-    
+    def create_filters(self, request, debts):
+        if request.GET.get("amount"):
+            debts = debts.filter(full_name__contains=self.request.GET["amount"])
+        if request.GET.get("date"):
+            debts = debts.filter(date_debt=self.request.GET["date"])
+        if request.GET.get("cpf"):
+            debts = debts.filter(customer_id__cpf=self.request.GET["cpf"])
+        return debts
     

@@ -1,6 +1,38 @@
-# Some exemples with curls
+# SCORE SERVICE - API
 
-## Get a token
+## Running In Development
+
+After you clone this repository you should configure you database settings in `microservice\settings.py` by changing the lines bellow:
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DATABASE_B_NAME', 'database_b'),
+        'USER': os.environ.get('DATABASE_B_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DATABASE_B_PASSWORD', 'postgres'),
+        'HOST': os.environ.get('DATABASE_B_HOST', 'localhost'),
+        'PORT': os.environ.get('DATABASE_B_PORT', '5432'),
+    }
+}
+
+mongoengine.connect(
+    db=os.environ.get('MONGODB_B_NAME', 'database_b'),
+    host=os.environ.get('MONGODB_B_HOST', 'localhost')
+)
+```
+
+To start your Django Framework:
+
+  * Run `pip3 install -r requirements.txt`;
+  * Install PosgreSQL and create the database configured;
+  * Install MongoDB and create the database configured;
+  * Run `python3 manage.py migrate`;
+  * Run `python3 manage.py runserver`;
+
+## Some exemples with curls
+
+### Get a token
 
 ```
 POST /api/v1/auth/token/

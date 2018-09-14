@@ -34,7 +34,9 @@ urlpatterns = [
     # Auth Endpoints
     path('api/v1/auth/', include((oauth2_endpoints, app_name), namespace="oauth2_provider")),
     # Users Endpoints
-    path('api/v1/', include(('apps.users.urls', app_name), namespace='users')),
+    path('api/v1/users/', include(('apps.users.urls', app_name), namespace='users')),
     # Customers Endpoints
-    path('api/v1/', include(('apps.customers.urls', app_name), namespace='customers'))
+    path('api/v1/customers/', include(('apps.customers.urls', app_name), namespace='customers')),
+    # Debts Endpoints
+    path('api/v1/debts/', include(('apps.debts.urls', app_name), namespace='debts')),
 ]

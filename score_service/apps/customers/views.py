@@ -3,10 +3,21 @@ from oauth2_provider.contrib.rest_framework import OAuth2Authentication, TokenHa
 from .serializers import CustomerSerializer
 from .models import Customer
 
-class Customer(viewsets.ModelViewSet):
-    queryset = Customer.objects.all()
+class CustomerView(viewsets.ModelViewSet):
     serializer_class = CustomerSerializer
     authentication_classes = [OAuth2Authentication]
     permission_classes = [TokenHasScope]
     required_scopes = ['read', 'write']
     
+    def get_queryset(self):
+        customers = Customer.objects.all()
+        return self.create_filters(self.request, customers)
+
+    def create_filters(self, request, customers):
+        if request.GET.get("name"):
+            customers = customers.filter(full_name__contains=self.request.GET["name"])
+        if request.GET.get("cpf"):
+            customers = customers.filter(cpf=self.request.GET["cpf"])
+        if request.GET.get("birth_date"):
+            customers = customers.filter(birth_date=self.request.GET["birth_date"])
+        return customers

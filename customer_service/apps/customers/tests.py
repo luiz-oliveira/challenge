@@ -8,12 +8,6 @@ from datetime import date
 
 class ReadCustomerTestCase(TestCase):
 
-    def list_url(self):
-        return reverse('customers:customer-list')
-
-    def detail_url(self):
-        return reverse('customers:customer-detail', args=[self.customer.id])
-
     def setUp(self):
         self.faker = Faker()
         self.client = Client()
@@ -37,3 +31,6 @@ class ReadCustomerTestCase(TestCase):
         self.debit.amount = 1000
         self.debit.date_debt = date.today()
         self.debit.save()
+
+        # The rest of login and token setup should be added bellow after
+        # The unitest logic only can be tested with tokens saved

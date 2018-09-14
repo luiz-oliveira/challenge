@@ -1,8 +1,8 @@
 from django.urls import path, include
 from rest_framework import routers
-from .views import CustomerView
+from .views import DebtView
 
 router = routers.DefaultRouter()
-router.register('', CustomerView, base_name='customers')
+router.register('', DebtView, base_name='debts')
 
 urlpatterns = [] + router.urls

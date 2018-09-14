@@ -1,6 +1,33 @@
-# Some exemples with curls
+# CUSTOMER SERVICE - API
 
-## Get a token
+## Running In Development
+
+After you clone this repository you should configure you database settings in `microservice\settings.py` by changing the lines bellow:
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DATABASE_A_NAME', 'database_a'),
+        'USER': os.environ.get('DATABASE_A_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DATABASE_A_PASSWORD', 'postgres'),
+        'HOST': os.environ.get('DATABASE_A_HOST', 'localhost'),
+        'PORT': os.environ.get('DATABASE_A_PORT', '5432'),
+    }
+}
+```
+
+To start your Django Framework:
+
+  * Run `pip3 install -r requirements.txt`;
+  * Install PosgreSQL and create the database configured;
+  * Run `python3 manage.py migrate`;
+  * Run `python3 manage.py runserver`;
+
+
+## Some exemples with curls
+
+### Get a token
 
 ```
 POST /api/v1/auth/token/
@@ -24,7 +51,7 @@ POST /api/v1/auth/token/
 
 ---
 
-## Get the customers list
+### Get the customers list
 
 ```
 POST /api/v1/customers/
@@ -68,7 +95,7 @@ You can filter by the fields using like these : `?cpf=111222444555`
 
 ---
 
-## Get a customer
+### Get a customer
 
 ```
 POST /api/v1/customers/{{id}}

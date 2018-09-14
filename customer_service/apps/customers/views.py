@@ -1,13 +1,13 @@
-from rest_framework import generics
+from rest_framework import viewsets
 from oauth2_provider.contrib.rest_framework import OAuth2Authentication, TokenHasScope
-from .serializers import CustomerListSerializer, CustomerDetailsSerializer
+from .serializers import CustomerSerializer
 from .models import Customer
 
-class CustomerList(generics.ListCreateAPIView):
+class CustomerView(viewsets.ModelViewSet):
     """
-        Renders a list of customers
+        A viewset that render a list of customers or a single one
     """  
-    serializer_class = CustomerListSerializer
+    serializer_class = CustomerSerializer
     authentication_classes = [OAuth2Authentication]
     permission_classes = [TokenHasScope]
     required_scopes = ['read', 'write']
@@ -26,15 +26,4 @@ class CustomerList(generics.ListCreateAPIView):
         if request.GET.get("phone"):
             customers = customers.filter(email=self.request.GET["phone"])
         return customers
-
-class CustomerDetails(generics.RetrieveAPIView):
-    """
-        Renders a specific customer with his debits
-    """  
-    queryset = Customer.objects.all()
-    serializer_class = CustomerDetailsSerializer
-    authentication_classes = [OAuth2Authentication]
-    permission_classes = [TokenHasScope]
-    required_scopes = ['read']
-    
     
