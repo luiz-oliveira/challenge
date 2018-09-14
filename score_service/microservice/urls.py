@@ -34,6 +34,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Auth Endpoints
     path('api/v1/auth/', include((oauth2_endpoints, app_name), namespace="oauth2_provider")),
+    # Users Endpoints
+    path('api/v1/users/', include(('apps.users.urls', app_name), namespace='users')),
     # Customers Endpoints
     path('api/v1/customers/', include(('apps.customers.urls', app_name), namespace="customers"))
 ]
