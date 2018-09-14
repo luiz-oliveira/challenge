@@ -26,7 +26,6 @@ On the furure we should think about these applications comunicates each other di
 **If some of these services have problems with hight concurrence, performance, or hight cost processes we could think about to use elixir and phoenix because of the Erlang VM.**
 
 <br/>
----
 
 # Actual Soluction
 

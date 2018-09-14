@@ -26,13 +26,13 @@ To start your Django Framework:
 
 ## Testing
 
-To run the unit test use `python3 manage.py test`;
-To run the coverage test use `coverage run --source="." manage.py test && coverage report`;
+  * To run the unit test use `python3 manage.py test`;
+  * To run the coverage test use `coverage run --source="." manage.py test && coverage report`;
 
 ## Code quality
 
-To run the prospector test use `prospector`;
-To run the pylint test use `pylint --load-plugins pylint_django apps/`;
+  * To run the prospector test use `prospector`;
+  * To run the pylint test use `pylint --load-plugins pylint_django apps/`;
 
 ## Some exemples with curls
 
