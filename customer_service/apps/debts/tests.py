@@ -6,7 +6,8 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from .models import Debt
 from apps.customers.models import Customer
-from datetime import datetime, timedelta
+from django.utils import timezone
+from datetime import timedelta
 from faker import Faker
 
 
@@ -29,7 +30,7 @@ class CustomerTestCase(APITestCase):
         )
 
         # Criating the access token
-        expiration = datetime.now() + timedelta(seconds=300)
+        expiration = timezone.now() + timedelta(seconds=300)
         self.access_token = AccessToken.objects.create(
             user=self.user,
             scope='read write',
@@ -54,45 +55,42 @@ class CustomerTestCase(APITestCase):
         self.debt.date_debt = "2015-08-18"
         self.debt.save()
         
+        # Criating a header
+        self.header = self.create_authorization_header()
 
-    def _create_authorization_header(self, token=None):
+    def reverse_by_name(self, name, **kwargs):
+        return reverse(name, kwargs=kwargs)
+
+    def create_authorization_header(self, token=None):
         return "Bearer {0}".format(token or self.access_token.token)
 
     def test_can_create_a_debt(self):
-        header = self._create_authorization_header()
-        url = reverse("debts:debts-list")
+        url = self.reverse_by_name("debts:debts-list")
         payload = {
             "customer_id": self.customer.pk,
             "amount": 2000,
             "date_debt": "2018-08-10",
         }
-        
-        response = self.csrf_client.post(url, data=payload, HTTP_AUTHORIZATION=header)
+        response = self.csrf_client.post(url, data=payload, HTTP_AUTHORIZATION=self.header)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_can_list_debts(self):
-        header = self._create_authorization_header()
-        url = reverse("debts:debts-list")       
-        response = self.csrf_client.get(url, HTTP_AUTHORIZATION=header)
+        url = self.reverse_by_name("debts:debts-list")   
+        response = self.csrf_client.get(url, HTTP_AUTHORIZATION=self.header)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_can_detail_a_customer(self):
-        header = self._create_authorization_header()
-        url = reverse("debts:debts-detail", args=[self.debt.pk])       
-        response = self.csrf_client.get(url, HTTP_AUTHORIZATION=header)
+        url = self.reverse_by_name("debts:debts-detail", pk=self.debt.pk)
+        response = self.csrf_client.get(url, HTTP_AUTHORIZATION=self.header)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_can_update_a_customer(self):
-        header = self._create_authorization_header()
-        url = reverse("debts:debts-list")
-        payload = {"email": "test2@email.com"}
-
-        url = reverse("debts:debts-detail", args=[self.debt.pk])       
-        response = self.csrf_client.patch(url, HTTP_AUTHORIZATION=header)
+        url = self.reverse_by_name("debts:debts-detail", pk=self.debt.pk)
+        payload = {"email": "test2@email.com"}      
+        response = self.csrf_client.patch(url, data=payload, HTTP_AUTHORIZATION=self.header)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_can_delete_a_customer(self):
-        header = self._create_authorization_header()
-        url = reverse("debts:debts-detail", args=[self.debt.pk])       
-        response = self.csrf_client.delete(url, HTTP_AUTHORIZATION=header)
+        url = self.reverse_by_name("debts:debts-detail", pk=self.debt.pk)     
+        response = self.csrf_client.delete(url, HTTP_AUTHORIZATION=self.header)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)

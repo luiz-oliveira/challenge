@@ -4,7 +4,8 @@ from oauth2_provider.models import Application, AccessToken
 from rest_framework.test import APIRequestFactory, APIClient
 from django.urls import reverse
 from django.contrib.auth.models import User
-from datetime import datetime, timedelta
+from django.utils import timezone
+from datetime import timedelta
 
 class CustomerTestCase(APITestCase):
 
@@ -37,7 +38,7 @@ class CustomerTestCase(APITestCase):
         self.access_token_common = AccessToken.objects.create(
             user=self.user,
             scope='read write',
-            expires=datetime.now() + timedelta(seconds=300),
+            expires=timezone.now() + timedelta(seconds=300),
             token='secret-access-token-key',
             application=self.app_common
         )
@@ -46,33 +47,37 @@ class CustomerTestCase(APITestCase):
         self.access_token_super = AccessToken.objects.create(
             user=self.super_user,
             scope='read write',
-            expires=datetime.now() + timedelta(seconds=300),
+            expires=timezone.now() + timedelta(seconds=300),
             token='secret-super-access-token-key',
             application=self.app_super
         )
 
-    def _create_authorization_header(self, token=None):
+        # Criating a header
+        self.header = self.create_authorization_header()
+
+    def reverse_by_name(self, name, **kwargs):
+        return reverse(name, kwargs=kwargs)
+
+    def create_authorization_header(self, token=None):
         return "Bearer {0}".format(token or self.access_token_super.token)
 
     def test_cannot_access_any_endpoint_whitout_token(self):
-        url = reverse("customers:customers-list")  
+        url = self.reverse_by_name("customers:customers-list")
         response = self.csrf_client.get(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_cannot_access_user_endpoints_whitout_been_admin(self):
-        header = self._create_authorization_header(self.access_token_common)
-        url = reverse("users:users-list")  
+        url = self.reverse_by_name("users:users-list")
+        header = self.create_authorization_header(self.access_token_common)
         response = self.client.get(url, HTTP_AUTHORIZATION=header)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_can_list_users(self):
-        header = self._create_authorization_header()
-        url = reverse("users:users-list")  
-        response = self.client.get(url, HTTP_AUTHORIZATION=header)
+        url = self.reverse_by_name("users:users-list")
+        response = self.client.get(url, HTTP_AUTHORIZATION=self.header)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_can_detail_a_user(self):
-        header = self._create_authorization_header()
-        url = reverse("users:users-detail", args=[self.user.pk])  
-        response = self.client.get(url, HTTP_AUTHORIZATION=header)
+        url = self.reverse_by_name("users:users-detail", pk=self.user.pk)
+        response = self.client.get(url, HTTP_AUTHORIZATION=self.header)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
