@@ -11,10 +11,10 @@ class UserList(generics.ListAPIView):
     authentication_classes = [OAuth2Authentication]
     required_scopes = ['read']
 
-
 class UserDetails(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [TokenHasScope, IsAdminUser]
     authentication_classes = [OAuth2Authentication]
     required_scopes = ['read']
+    

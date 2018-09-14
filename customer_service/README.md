@@ -28,7 +28,7 @@ To start your Django Framework:
 
 To run the unit test use `python3 manage.py test`;
 To run the coverage test use `coverage run --source="." manage.py test && coverage report`;
-
+To run the prospector test use `prospector`;
 
 ## Some exemples with curls
 

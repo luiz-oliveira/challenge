@@ -1,8 +1,11 @@
-from django.urls import path, include
+"""
+    This module contains the debits urls
+"""
+
 from rest_framework import routers
 from .views import DebtView
 
-router = routers.DefaultRouter()
-router.register('', DebtView, base_name='debts')
+ROUTER = routers.DefaultRouter()
+ROUTER.register('', DebtView, base_name='debts')
 
-urlpatterns = [] + router.urls
+urlpatterns = [] + ROUTER.urls

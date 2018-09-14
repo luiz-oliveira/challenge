@@ -7,6 +7,8 @@ psycopg2==2.7.5
 
 # Test and code quality
 pylint==2.1.1
+pylint-django==2.0.2
+prospector== 1.1.2
 coverage==4.5.1
 django-cors-headers==2.4.0
 Faker==0.9.1

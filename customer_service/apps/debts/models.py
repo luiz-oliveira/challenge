@@ -1,3 +1,7 @@
+"""
+    This module contains all Debt models.
+"""
+
 from django.db import models
 from apps.customers.models import Customer
 
@@ -14,3 +18,4 @@ class Debt(models.Model):
 
     def __str__(self):
         return "{} = R$ {}".format(self.customer_id, self.amount)
+        

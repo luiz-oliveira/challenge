@@ -1,5 +1,8 @@
+"""
+    This module contains all Customers models.
+"""
+
 from django.db import models
-from .validators import CustomValidators
 
 class Customer(models.Model):
     """
@@ -14,7 +17,7 @@ class Customer(models.Model):
     address = models.CharField(max_length=250)
     cpf = models.CharField(max_length=11, unique=True)
     email = models.CharField(max_length=100)
-    phone = models.CharField(validators=CustomValidators.validate_phone(), max_length=13)
+    phone = models.CharField(max_length=13)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 

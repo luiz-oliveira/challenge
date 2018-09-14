@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 
-class CustomerTestCase(APITestCase):
+class UserTestCase(APITestCase):
 
     def setUp(self):
         self.factory = APIRequestFactory()
@@ -55,7 +55,7 @@ class CustomerTestCase(APITestCase):
         return "Bearer {0}".format(token or self.access_token_super.token)
 
     def test_cannot_access_any_endpoint_whitout_token(self):
-        url = reverse("customers:customers-list")  
+        url = reverse("customers:customers-list")
         response = self.csrf_client.get(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
