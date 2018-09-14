@@ -1,7 +1,8 @@
-from django.urls import path, include
-from .views import CustomerList, CustomerDetails
+from rest_framework_mongoengine import routers
+from .views import Customer
 
-urlpatterns = [
-    path('customers/', CustomerList.as_view()),
-    path('customers/<int:pk>/', CustomerDetails.as_view())
-]
+# Mongo routers
+router = routers.DefaultRouter()
+router.register(r'mongo', Customer)
+
+urlpatterns = [] + router.urls

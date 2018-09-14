@@ -5,9 +5,6 @@ from django.contrib.auth.models import User
 from .serializers import UserSerializer
 
 class UserList(generics.ListAPIView):
-    """
-        Renders a list of users
-    """  
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [TokenHasScope, IsAdminUser]
@@ -16,9 +13,6 @@ class UserList(generics.ListAPIView):
 
 
 class UserDetails(generics.RetrieveAPIView):
-    """
-        Renders a specific user
-    """  
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [TokenHasScope, IsAdminUser]

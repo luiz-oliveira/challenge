@@ -5,7 +5,7 @@ from faker import Faker
 from random import randint
 from django.contrib.auth.models import User
 
-class ReadDebitTestCase(TestCase):
+class ReadCustomerTestCase(TestCase):
 
     def list_url(self):
         return reverse('customers:customer-list')
