@@ -51,11 +51,11 @@ POST /api/v1/auth/token/
 >**Response**
 >```json
 >{
->    "access_token": "bg6Ikaf2LHSzTu4TZl5aYIFWRNWeH8", 
+>    "access_token": "vnKHstGVI78DpzJW7nBZaOvRFJLJ5s", 
 >    "expires_in": 36000, 
 >    "token_type": "Bearer", 
 >    "scope": "read write", 
->    "refresh_token": "nGbj3vPEZZoGe1A3sXwkFUkygWYd2K"
+>    "refresh_token": "5SLIsGoeiYmVpNYTOPeZblKuPumjLU"
 >}
 
 ---

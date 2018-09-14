@@ -4,7 +4,8 @@ from oauth2_provider.models import Application, AccessToken
 from rest_framework.test import APIRequestFactory, APIClient
 from django.urls import reverse
 from django.contrib.auth.models import User
-from datetime import datetime, timedelta
+from datetime import timedelta
+from django.utils import timezone
 
 class UserTestCase(APITestCase):
 
@@ -37,7 +38,7 @@ class UserTestCase(APITestCase):
         self.access_token_common = AccessToken.objects.create(
             user=self.user,
             scope='read write',
-            expires=datetime.now() + timedelta(seconds=300),
+            expires=timezone.now() + timedelta(seconds=300),
             token='secret-access-token-key',
             application=self.app_common
         )
@@ -46,7 +47,7 @@ class UserTestCase(APITestCase):
         self.access_token_super = AccessToken.objects.create(
             user=self.super_user,
             scope='read write',
-            expires=datetime.now() + timedelta(seconds=300),
+            expires=timezone.now() + timedelta(seconds=300),
             token='secret-super-access-token-key',
             application=self.app_super
         )
