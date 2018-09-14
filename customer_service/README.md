@@ -68,7 +68,7 @@ You can filter by the fields using like these : `?cpf=111222444555`
 
 ---
 
-## Get the customers list
+## Get a customer
 
 ```
 POST /api/v1/customers/{{id}}
