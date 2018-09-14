@@ -1,0 +1,8 @@
+[run]
+omit =
+    */fixtures/*
+    */microservice/wsgi.py*
+    *manage.py*
+    */apps/customers/apps.py*
+    */apps/users/apps.py*
+    */apps/debts/apps.py*

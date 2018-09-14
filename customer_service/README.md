@@ -24,6 +24,11 @@ To start your Django Framework:
   * Run `python3 manage.py migrate`;
   * Run `python3 manage.py runserver`;
 
+## Testing
+
+To run the unit test use `python3 manage.py test`;
+To run the coverage test use `coverage run --source="." manage.py test && coverage report`;
+
 
 ## Some exemples with curls
 
