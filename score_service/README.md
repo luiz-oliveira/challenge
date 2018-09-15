@@ -37,7 +37,7 @@ To start your Django Framework:
 
 ## Code quality
 
-  * To run the prospector test use `prospector --uses django`;
+  * To run the prospector test use `prospector --uses django apps/`;
   * To run the pylint test use `pylint --load-plugins pylint_django apps/`;
 
 ## Some exemples with curls
