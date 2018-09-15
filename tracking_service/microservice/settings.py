@@ -10,7 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import os, mongoengine
+import os
+import mongoengine
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -121,6 +122,11 @@ mongoengine.connect(
     host=os.environ.get('MONGODB_C_HOST', 'localhost')
 )
 
+TEST_MONGO_DATABASE = {
+    'db': 'test_database_c',
+    'host': os.environ.get('MONGODB_C_HOST', 'localhost'),
+    'port': os.environ.get('MONGODB_C_PORT', 27017)
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

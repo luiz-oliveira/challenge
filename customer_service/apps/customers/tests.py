@@ -37,7 +37,7 @@ class CustomerTestCase(CustomAPITestCase):
         """
             Test if the user can get a customer details
         """
-        url = self.reverse_by_name("customers:customers-list")
+        url = self.reverse_by_name("customers:customers-detail", pk=self.customer.pk)
         response = self.csrf_client.get(url, HTTP_AUTHORIZATION=self.header)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
