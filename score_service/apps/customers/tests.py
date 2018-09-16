@@ -10,6 +10,21 @@ class CustomerTestCase(CustomAPITestCase):
         Customer tests cases
     """
 
+    def test_can_create_a_customer(self):
+        """
+            Test if the user can create a customer
+        """
+        url = self.reverse_by_name("customers:customers-list")
+        payload = {
+            "full_name": self.faker.name(),
+            "cpf": "12345678912",
+            "birth_date": "1992-04-10 00:00:00",
+            "incomes": [],
+            "patrimonies": []
+        }
+        response = self.csrf_client.post(url, data=payload, HTTP_AUTHORIZATION=self.header)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
     def test_can_list_customers(self):
         """
             Test if the user can a list of customers
@@ -24,6 +39,15 @@ class CustomerTestCase(CustomAPITestCase):
         """
         url = self.reverse_by_name("customers:customers-detail", id=self.customer.id)
         response = self.csrf_client.get(url, HTTP_AUTHORIZATION=self.header)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_can_update_a_customer(self):
+        """
+            Test if the user can update a customer
+        """
+        url = self.reverse_by_name("customers:customers-detail", id=self.customer.pk)
+        payload = {"birth_date": "1992-04-10 10:01:00"}
+        response = self.csrf_client.patch(url, data=payload, HTTP_AUTHORIZATION=self.header)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_can_delete_a_customer(self):
