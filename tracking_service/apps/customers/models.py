@@ -1,3 +1,7 @@
+"""
+    This module contains all customers models.
+"""
+
 from mongoengine import Document, fields
 from apps.transactions.models import Transaction
 

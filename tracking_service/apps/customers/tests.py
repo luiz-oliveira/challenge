@@ -22,7 +22,7 @@ class CustomerTestCase(CustomAPITestCase):
         """
             Test if the user can get a customer details
         """
-        url = self.reverse_by_name("customers:customers-detail", id=self.customer.id)
+        url = self.reverse_by_name("customers:customers-detail", pk=self.customer.id)
         response = self.csrf_client.get(url, HTTP_AUTHORIZATION=self.header)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -30,6 +30,6 @@ class CustomerTestCase(CustomAPITestCase):
         """
             Test if the user can delete a customer
         """
-        url = self.reverse_by_name("customers:customers-detail", id=self.customer.id)
+        url = self.reverse_by_name("customers:customers-detail", pk=self.customer.id)
         response = self.csrf_client.delete(url, HTTP_AUTHORIZATION=self.header)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)

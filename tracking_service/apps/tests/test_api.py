@@ -9,9 +9,8 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
 from faker import Faker
-from apps.customers.models import Customer
 from test_addons import MongoTestCase
-
+from apps.customers.models import Customer
 
 class CustomAPITestCase(APITestCase, MongoTestCase):
     """

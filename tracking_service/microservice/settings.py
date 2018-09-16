@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Custom Apps
     'apps.users',
     'apps.customers',
+    'apps.transactions',
 
     # 3rd Party Apps
     'rest_framework',

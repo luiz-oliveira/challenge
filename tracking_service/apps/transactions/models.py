@@ -1,3 +1,7 @@
+"""
+    This module contains all transactions models.
+"""
+
 from mongoengine import EmbeddedDocument, fields
 
 class Transaction(EmbeddedDocument):
