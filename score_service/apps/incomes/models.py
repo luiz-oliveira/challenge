@@ -1,7 +1,13 @@
+"""
+    This module contains all incomes models.
+"""
+
 from mongoengine import EmbeddedDocument, fields
 
 class Income(EmbeddedDocument):
-
+    """
+        This models contains the source Income data.
+    """
     income_type = fields.StringField(required=True, max_length=100)
     amount = fields.DecimalField(required=True)
 

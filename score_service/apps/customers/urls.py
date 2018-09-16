@@ -1,3 +1,7 @@
+"""
+    This module contains the customers urls
+"""
+
 from rest_framework_mongoengine import routers
 from .views import CustomerView
 

@@ -1,3 +1,7 @@
+"""
+    This module contains the users urls
+"""
+
 from django.urls import path
 from .views import UserList, UserDetails
 

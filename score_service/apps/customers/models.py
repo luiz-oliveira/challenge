@@ -1,3 +1,7 @@
+"""
+    This module contains all customers models.
+"""
+
 from mongoengine import Document, fields
 from apps.incomes.models import Income
 from apps.patrimonies.models import Patrimony
