@@ -29,7 +29,7 @@ On the furure we should think about these applications comunicates each other di
 
 # Actual Soluction
 
-Because of the little time to develop, the best approach was to develop only query services with individual authentication so that we can maintain at least a basic security across all databases.
+Because of the short time to develop, the best approach was to develop only query services with individual authentication so that we can maintain at least a basic security across all databases.
 
 **Continuous Integration and development could be implemented individualy in the future using the Docker**
 
