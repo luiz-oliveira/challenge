@@ -20,9 +20,6 @@ The ideal soluction is to develop 4 diferent services tha carries specifics conf
 
 ![Ideal Architecture Soluction](https://github.com/luiz-oliveira/challenge/blob/master/doc/ideal_soluction.png)
 
-<br/>
-On the furure we should think about these applications comunicates each other directly and asynchronous, we can think about to use tornado or something like that.
-
 **If some of these services have problems with hight concurrence, performance, or hight cost processes we could think about to use elixir and phoenix because of the Erlang VM.**
 
 <br/>
